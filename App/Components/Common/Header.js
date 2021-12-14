@@ -1,5 +1,9 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, 
+    Text, 
+    StyleSheet, 
+    TouchableOpacity 
+} from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 
@@ -17,13 +21,18 @@ export default function Header() {
              onPress ={()=>navigation.navigate("Menu")}
              />
              <Text style = {Styles.headerText}>INDIANSHOP</Text>
+             <TouchableOpacity onPress ={()=>navigation.navigate("Cart")} style = {Styles.cartWrap}>
              <View style = {Styles.iconwrap}>
                  
-                <Icon name="shopping-cart" size={27} color="#2a368f"  style = {Styles.iconstyle}/>
+                <Icon name="shopping-cart" size={27} color="#2a368f"  
+                style = {Styles.iconstyle}
+                
+                />
              </View>
              <View style = {Styles.cartCount}>
                 <Text style = {Styles.cartCoutText}>15</Text>
              </View>
+             </TouchableOpacity>
              
             </View>
         </View>
@@ -83,5 +92,8 @@ const Styles = StyleSheet.create({
     },
     cartCoutText:{
         color:'#ffff',
+    },
+    cartWrap: {
+        marginLeft:20,
     }
 })
