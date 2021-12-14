@@ -11,6 +11,8 @@ import {
     LayoutAnimation,
     Dimensions
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
 //Menu Content
 const CONTENT = [
     {
@@ -72,31 +74,37 @@ export default function Menu() {
     
     const [isExpanded,setisExpanded] = useState(false);
     console.log(isExpanded);
-    
+    const navigation = useNavigation();
   
     return (
     <SafeAreaView style = {{flex:1}}>
         <View style = {styles.container}>
         <ScrollView>
+
         <View>
             <View>
                 <TouchableOpacity style = {styles.MenuItem} 
                      onPress = {()=>setisExpanded(!isExpanded)}>
+                         <Icon name = "account-circle" size={30}  color = {'#2a368f'} 
+                          style = {styles.menuLeftIcon}/>
                     <Text style = {styles.MenuItemText}>Account</Text>
+                    
                     <Icon name={isExpanded ? 
                         'keyboard-arrow-up' : 'keyboard-arrow-down'} 
                         size={30} style = {styles.MenuIcon} color = {'#2a368f'}/>
                 </TouchableOpacity>
                 <View style = {{
-                    height: (!isExpanded)? 0: '100%',
-                    display: (!isExpanded)? 'none': 'block'
+                    height: (!isExpanded)? 0: '77%',
+                    display: (!isExpanded)? 'none': 'block',
+                    
                     }}>
                    
                         <TouchableOpacity style = {styles.Content}>
                             <Text style = {styles.subText}> DashBoard</Text>
                             <View style = {styles.seperator}/>
                         </TouchableOpacity>
-                        <TouchableOpacity style = {styles.Content}>
+                        <TouchableOpacity style = {styles.Content} 
+                                          onPress ={()=>navigation.navigate("List")}>
                             <Text style = {styles.subText}> List</Text>
                             <View style = {styles.seperator}/>
                         </TouchableOpacity>
@@ -118,15 +126,18 @@ export default function Menu() {
             </View>
 
             <TouchableOpacity style = {styles.MenuItem}>
-                <Text style = {styles.MenuItemText}>Products</Text>
+                <Icon name = "shopping-basket" size={30}  color = {'#2a368f'} />
+                <Text style = {styles.MenuItemText}> Products</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style = {styles.MenuItem}>
-                <Text style = {styles.MenuItemText}>Subscription</Text>
+                <Icon name = "subscriptions" size={30}  color = {'#2a368f'} />
+                <Text style = {styles.MenuItemText}> Subscription</Text>
             </TouchableOpacity>
             
-            <TouchableOpacity style = {styles.MenuItem}>
-                <Text style = {styles.MenuItemText}>Settings</Text>
+            <TouchableOpacity style = {styles.MenuItem} onPress ={()=>navigation.navigate("Settings")}>
+                <Icon name = "settings" size={30}  color = {'#2a368f'} />
+                <Text style = {styles.MenuItemText}> Settings</Text>
             </TouchableOpacity>
         </View>
         </ScrollView>
@@ -168,11 +179,14 @@ MenuItem:
     borderBottomColor: '#2a368f',
     borderBottomWidth: 1,
     borderStyle: 'solid',
+    flexDirection:'row',
+    flex:1,
 },
 MenuItemText:{
     fontSize: 18,
     fontWeight: 300,
     color: '#2a368f',
+    flex:0.7,
 },
 Content:{
     paddingLeft:20,
@@ -189,9 +203,13 @@ seperator:{
     width:'100%',
 },
 MenuIcon:{
-    marginTop: -26,
     marginLeft: width*0.5,
+    flex: 0.15,
 },
+menuLeftIcon:{
+flex: 0.15,
+paddingRight: 5,
+}
 
 
 })
