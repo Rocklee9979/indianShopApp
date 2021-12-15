@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     buttonText: {
         fontWeight: 'bold',
         textAlign: 'center',
-        color: '2a368f',
+        color: '#2a368f',
     },
     bodyContainer: {
         // flex: 1,
