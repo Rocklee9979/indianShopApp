@@ -184,7 +184,7 @@ MenuItem:
 },
 MenuItemText:{
     fontSize: 18,
-    fontWeight: 300,
+    fontWeight: "300",
     color: '#2a368f',
     flex:0.7,
 },
@@ -196,7 +196,7 @@ subText:{
     fontSize:16,
     padding:10,
     color: '#2a368f',
-    fontWeight: 300,
+    fontWeight: "300",
 },
 seperator:{
     height: 0.5,
