@@ -13,7 +13,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
 import { Button } from 'react-native-elements';
-import axios from 'axios';
+
 const baseUrl = 'http://localhost:3000/tb_users_login';
 export default function Login() {
     const navigation = useNavigation();
@@ -23,26 +23,19 @@ export default function Login() {
     const [valIcon, setValIcon] = useState("");
     const [iconColorPass, setIconColorPass] = useState("#2A368F");
     const [valIconPass, setValIconPass] = useState("");
+
     function SubmitLoginForm(){
-        if(userName=="" || Password =="")
-        {
+        if(userName=="" || Password ==""){
             alert("erroorrr");
         }
         else{
-        const userObject = {
-            user_name: userName,
-            user_pass: Password
-        };
-        axios.post(baseUrl, userObject)
-            .then((res) => {
-                console.log(res.data)
-            }).catch((error) => {
-                console.log(error)
-            });
-            setUserName('');
-            setPassword('');
+            const userObject = {
+                user_name: userName,
+                user_pass: Password
+            }
         }
     }
+
     function handleChangeEmail(e)
     {
       let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
