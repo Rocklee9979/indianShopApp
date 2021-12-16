@@ -16,7 +16,6 @@ import * as Animatable from 'react-native-animatable';
 //import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 //import { useTheme } from '@react-navigation/native';
 
-
 export default function Home() {
     //const { colors } = useTheme();
     const navigation = useNavigation();
@@ -38,15 +37,16 @@ export default function Home() {
           >
               <MainTitle color={'#2a368f'} size = {24}>Stay connected with Us!</MainTitle>
               <SubTitle size = {18}>Start Shopping...</SubTitle>
-              <View style={styles.button}>
+              <View>
+
+              <TouchableOpacity 
+              style = {{alignItems:'flex-end'}}
+              onPress = {()=>navigation.navigate("Login")}>
+                <View style = {styles.CustomButton}>
+                    <Text style = {styles.ButtonLabel}>Get Started</Text>
+                </View>
+              </TouchableOpacity>
               
-              <Button 
-              title="Get Started" 
-              color={'#2a368f'}  
-              type="clear" 
-              style = {styles.button} 
-              onPress = {()=>navigation.navigate("Login")}
-              />
               
               </View>
           </Animatable.View>
@@ -80,13 +80,6 @@ const styles = StyleSheet.create({
       width: height_logo,
       height: height_logo
   },
-  
-  button: {
-        alignItems: 'flex-end',
-        marginTop: 30,
-        color:'#2a368f',
-        borderRadius: 8,
-  },
   signIn: {
       width: 150,
       height: 40,
@@ -98,5 +91,20 @@ const styles = StyleSheet.create({
   textSign: {
       color: 'white',
       fontWeight: 'bold'
-  }
+  },
+  CustomButton: {
+    alignItems: 'center',
+    marginTop: 30,
+    borderRadius: 8,
+    backgroundColor:'#2a368f',
+    width: 116,
+    height: 40,
+},
+ButtonLabel:{
+    color:'#fff',
+    fontSize: 14,
+    paddingBottom:8,
+    paddingTop:8,
+    
+}
 });

@@ -6,12 +6,14 @@ import {
     StatusBar,
     Text,
     Image,
-    Dimensions 
+    TextInput,
+    Dimensions,
+    TouchableOpacity 
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { Input,Button } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
+import { Button } from 'react-native-elements';
 
 import axios from 'axios';
 const baseUrl = 'http://localhost:3000/tb_users_login';
@@ -90,50 +92,54 @@ export default function Login() {
                 </View>
             </View>
             <View style = {styles.secondcontainer}>
-            <Input placeholder='Email'
-                placeholderTextColor = '#f9db04'
-                keyboardType = 'email-address'
-                color = '#f9db04'
-                onChangeText={
-                   email => handleChangeEmail(email)
-                   }
-               // onBlur = {handleBlur('email')}
-               // value = {values.email}
-                leftIcon={
-                <Icon name='user' size={24} color='#f9db04'/>}
-                rightIcon={
-                    <AntDesign  name= {valIcon} size={18} color={iconColor}/>}
-            />
-
-            <Input placeholder="Password" 
-                secureTextEntry={true} 
-                placeholderTextColor = '#f9db04'
-                keyboardType = 'email-address'
-                onChangeText={text => setPassword(text),
-                    password => handleChangePassword(password)}
-                //onBlur = {handleBlur('email')}
-                //value = {values.email}
-                leftIcon={
-                <Icon name='lock'  size={24} color='#f9db04' />} 
-                rightIcon={
-                    <AntDesign  name= {valIconPass} size={18} color={iconColorPass}/>}
-            />
+                <View style = {styles.loginContainer}>
+                    <Icon name='user'  size={24} color='#f9db04' 
+                    style = {{flex: 0.1, marginTop:15}}/>
+                    <TextInput placeholder='Email' 
+                    placeholderTextColor = '#f9db04'
+                    style = {styles.Input} autoComplete = 'off' 
+                   
+                    />
+                </View>
+                <View style = {styles.loginContainer}>
+                    <Icon name='lock'  size={24} color='#f9db04' 
+                    style = {{flex: 0.1, marginTop:15}}/>
+                    <TextInput placeholder='Password' 
+                    placeholderTextColor = '#f9db04'
+                    secureTextEntry={true} 
+                    style = {styles.Input} autoComplete = 'off' 
+                    
+                    />
+                </View>
             
-            <Button 
-                title="Login"   
-                type="clear"
-                onPress = {()=>SubmitLoginForm()} 
-                style = {styles.LogButtonStyle} />
-            <Button 
-                title="SignUp Now"   
-                type="clear" 
-                style = {styles.RegButtonStyle} 
-                onPress ={()=>navigation.navigate("SignUp")}
-                />
+            <TouchableOpacity 
+              style = {{alignItems:'flex-start'}}>
+                <View style = {styles.LogButtonStyle}>
+                    <Text style = {{color:'#2a368f', fontSize:18}}>Login</Text>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              onPress ={()=>navigation.navigate("SignUp")}
+              style = {{alignItems:'flex-start'}}>
+                <View style = {styles.RegButtonStyle}>
+                    <Text style = {{color:'#2a368f', fontSize:18}}>SignUp</Text>
+                </View>
+            </TouchableOpacity>
+            
             </View>
             <View style = {styles.ThirdContainer}>
-                <Text style = {styles.TextLink} onPress ={()=>navigation.navigate("DashBoard")}>Guest User</Text>
-                <Text style = {styles.TextLink} onPress ={()=>navigation.navigate("ForgotPassword")}>Forgot Password</Text>
+                
+                    <Text 
+                    style = {styles.TextLink} 
+                    onPress ={()=>navigation.navigate("DashBoard")}>
+                        Guest User
+                    </Text>
+                    <Text 
+                    style = {styles.TextLink} 
+                    onPress ={()=>navigation.navigate("ForgotPassword")}>
+                        Forgot Password
+                    </Text>
+                
             </View>
         </View>
     )
@@ -153,17 +159,24 @@ const styles = StyleSheet.create ({
         padding: 20,
     },
     secondcontainer:{
-        flex:0.4,
+        flex:0.5,
         alignItems:'center',
     },
     ThirdContainer:{
-        flex:0.2,
+        flex:0.1,
         alignItems:'center',
-        marginTop:20,
+    },
+    loginContainer:{
+        flex: 1, 
+        flexDirection: 'row',
+        marginHorizontal:5,
+        height: 50,
+        width:300,
+
     },
     TextLink:{
-        marginTop: 20,
-            fontSize: 18,
+            marginTop: 5,
+            fontSize: 16,
             color: '#ffff',
             borderBottomColor:'#f9db04',
             borderBottomStartRadius:1,
@@ -202,9 +215,9 @@ const styles = StyleSheet.create ({
         alignItems: 'center',
         borderRadius: 8,
         marginVertical:5,
-        height: 50,
+        height: 40,
         width:300,
-        marginHorizontal:5,
+        marginHorizontal:8,
     },
     RegButtonStyle:{
         backgroundColor: '#f9db04',
@@ -215,9 +228,19 @@ const styles = StyleSheet.create ({
         alignItems: 'center',
         borderRadius: 8,
         marginVertical:5,
-        height: 50,
+        height: 40,
         width:300,
-        marginHorizontal:5,
+        marginHorizontal:8,
 
-    }
+    },
+    Input: {
+        height: 40,
+        width: '100%',
+        margin: 12,
+        borderWidth: 1,
+        padding: 10,
+        color: '#f9db04',
+        fontSize: 18,
+        borderColor: '#ffff',
+      },
 })

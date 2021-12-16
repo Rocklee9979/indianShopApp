@@ -34,13 +34,14 @@ export default function Welcome() {
               <SubTitle size = {18}>Start Shopping...</SubTitle>
               <View style={styles.button}>
               
-              <Button 
-              title="Get Started" 
-              color={'#2a368f'}  
-              type="clear" 
-              style = {styles.button} 
-              onPress = {()=>navigation.navigate("Login")}
-              />
+            
+              <TouchableOpacity 
+              style = {{alignItems:'flex-end'}}
+              onPress = {()=>navigation.navigate("Login")}>
+                <View style = {styles.CustomButton}>
+                    <Text style = {styles.ButtonLabel}>Get Started</Text>
+                </View>
+              </TouchableOpacity>
               
               </View>
           </Animatable.View>
@@ -78,5 +79,20 @@ const styles = StyleSheet.create({
         color:'#2a368f',
         borderRadius: 8,
   },
+  CustomButton: {
+    alignItems: 'center',
+    marginTop: 30,
+    borderRadius: 8,
+    backgroundColor:'#2a368f',
+    width: 116,
+    height: 40,
+},
+ButtonLabel:{
+    color:'#fff',
+    fontSize: 14,
+    paddingBottom:8,
+    paddingTop:8,
+    
+}
   
 });

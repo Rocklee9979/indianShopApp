@@ -8,6 +8,7 @@ import { View,
         Dimensions,
         SafeAreaView,
         ScrollView,
+        TouchableOpacity
     } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input,Button } from 'react-native-elements';
@@ -55,13 +56,14 @@ export default function SignUp() {
             />
             
             
+            <TouchableOpacity 
+              onPress ={()=>navigation.navigate("Welcome")}
+              style = {{alignItems:'flex-start'}}>
+                <View style = {styles.LogButtonStyle}>
+                    <Text style = {{color:'#2a368f', fontSize:18}}>Register</Text>
+                </View>
+            </TouchableOpacity>
             
-            
-            <Button title="Register"
-               type="clear" 
-               style = {styles.LogButtonStyle} 
-               onPress = {()=>navigation.navigate("Welcome")}
-               />
             </View>
             </ScrollView>
         </SafeAreaView>
@@ -100,7 +102,7 @@ const styles = StyleSheet.create ({
         alignItems: 'center',
         borderRadius: 8,
         marginVertical:5,
-        height: 50,
+        height: 40,
         width: 269,
         marginHorizontal:5,
     },
