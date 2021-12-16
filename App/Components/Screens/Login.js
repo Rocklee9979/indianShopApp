@@ -1,37 +1,29 @@
 import React, {useEffect, useState} from 'react';
-
-import { 
+import {
     View,
-    StyleSheet, 
+    StyleSheet,
     StatusBar,
     Text,
     Image,
-    Dimensions 
+    TextInput,
+    Dimensions,
+    TouchableOpacity
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { Input,Button } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
-
-const api_helper = require("../../lib/APIHelper")
-
+import { Button } from 'react-native-elements';
+import axios from 'axios';
+const baseUrl = 'http://localhost:3000/tb_users_login';
 export default function Login() {
     const navigation = useNavigation();
-
     const [userName, setUserName] = useState("");
     const [Password, setPassword] = useState("");
-    const [iconColor, setIconColor] = useState("#2a368f");
+    const [iconColor, setIconColor] = useState("#2A368F");
     const [valIcon, setValIcon] = useState("");
-    const [iconColorPass, setIconColorPass] = useState("#2a368f");
+    const [iconColorPass, setIconColorPass] = useState("#2A368F");
     const [valIconPass, setValIconPass] = useState("");
-
-    function componentDidMount(){
-        console.log("Mounting login component");
-        alert("functioning tab")
-    }
-
     function SubmitLoginForm(){
-
         if(userName=="" || Password =="")
         {
             alert("erroorrr");
@@ -41,22 +33,27 @@ export default function Login() {
             user_name: userName,
             user_pass: Password
         };
+        axios.post(baseUrl, userObject)
+            .then((res) => {
+                console.log(res.data)
+            }).catch((error) => {
+                console.log(error)
+            });
+            setUserName('');
+            setPassword('');
         }
     }
-
-
     function handleChangeEmail(e)
     {
       let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
         if (reg.test(e) === false) {
-            
             setIconColor('red');
             setValIcon('closecircleo');
         }
         else {
            setUserName(e);
            //console.log(userName);
-           setIconColor('#1ff11f');
+           setIconColor('#1FF11F');
            setValIcon('checkcircleo');
         }
     }
@@ -65,79 +62,74 @@ export default function Login() {
         if(password_val.length == 0){
             setIconColorPass('red');
             setValIconPass('closecircleo');
-
         }
         else{
-            setIconColorPass('#1ff11f');
+            setIconColorPass('#1FF11F');
             setValIconPass('checkcircleo');
- 
         }
     }
     return (
         <View style = {styles.container}>
-            <StatusBar backgroundColor='#2a368f' barStyle="dark-content"/>
+            <StatusBar backgroundColor='#2A368F' barStyle="dark-content"/>
             <View style = {styles.firstcontainer}>
                 <View style = {styles.innercontainer}>
-                <Image source = {require('../../../assets/images/shopping.png')} style = {styles.logostyle} />              
+                <Image source = {require('../../../assets/images/shopping.png')} style = {styles.logostyle} />
                   <Text style = {styles.logoText}>INDIAN SHOP</Text>
                   <Text style = {styles.logoSubText}>Account Login</Text>
                 </View>
             </View>
             <View style = {styles.secondcontainer}>
-            <Input placeholder='Email'
-                placeholderTextColor = '#f9db04'
-                keyboardType = 'email-address'
-                color = '#f9db04'
-                onChangeText={
-                   email => handleChangeEmail(email)
-                   }
-               // onBlur = {handleBlur('email')}
-               // value = {values.email}
-                leftIcon={
-                <Icon name='user' size={24} color='#f9db04'/>}
-                rightIcon={
-                    <AntDesign  name= {valIcon} size={18} color={iconColor}/>}
-            />
-
-            <Input placeholder="Password"
-                secureTextEntry={true}
-                placeholderTextColor = '#f9db04'
-                keyboardType = 'email-address'
-                onChangeText={text => setPassword(text),
-                    password => handleChangePassword(password)}
-                //onBlur = {handleBlur('email')}
-                //value = {values.email}
-                leftIcon={
-                <Icon name='lock'  size={24} color='#f9db04' />}
-                rightIcon={
-                    <AntDesign  name= {valIconPass} size={18} color={iconColorPass}/>}
-            />
-            
-            <Button 
-                title="Login"   
-                type="clear"
-                onPress = {()=>SubmitLoginForm()}
-                style = {styles.LogButtonStyle} />
-            <Button 
-                title="SignUp Now"   
-                type="clear" 
-                style = {styles.RegButtonStyle} 
-                onPress ={()=>navigation.navigate("SignUp")}
-                />
+                <View style = {styles.loginContainer}>
+                    <Icon name='user'  size={24} color='#F9DB04'
+                    style = {{flex: 0.1, marginTop:15}}/>
+                    <TextInput placeholder='Email'
+                    placeholderTextColor = '#F9DB04'
+                    style = {styles.Input} autoComplete = 'off'
+                    />
+                </View>
+                <View style = {styles.loginContainer}>
+                    <Icon name='lock'  size={24} color='#F9DB04'
+                    style = {{flex: 0.1, marginTop:15}}/>
+                    <TextInput placeholder='Password'
+                    placeholderTextColor = '#F9DB04'
+                    secureTextEntry={true}
+                    style = {styles.Input} autoComplete = 'off'
+                    />
+                </View>
+            <TouchableOpacity
+              style = {{alignItems:'flex-start'}}>
+                <View style = {styles.LogButtonStyle}>
+                    <Text style = {{color:'#2A368F', fontSize:18}}>Login</Text>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress ={()=>navigation.navigate("SignUp")}
+              style = {{alignItems:'flex-start'}}>
+                <View style = {styles.RegButtonStyle}>
+                    <Text style = {{color:'#2A368F', fontSize:18}}>SignUp</Text>
+                </View>
+            </TouchableOpacity>
             </View>
             <View style = {styles.ThirdContainer}>
-                <Text style = {styles.TextLink} onPress ={()=>navigation.navigate("DashBoard")}>Guest User</Text>
-                <Text style = {styles.TextLink} onPress ={()=>navigation.navigate("ForgotPassword")}>Forgot Password</Text>
+                    <Text
+                    style = {styles.TextLink}
+                    onPress ={()=>navigation.navigate("DashBoard")}>
+                        Guest User
+                    </Text>
+                    <Text
+                    style = {styles.TextLink}
+                    onPress ={()=>navigation.navigate("ForgotPassword")}>
+                        Forgot Password
+                    </Text>
             </View>
         </View>
     )
 }
-
 const styles = StyleSheet.create ({
     container: {
        marginTop: StatusBar.currentHeight,
        paddingHorizontal: 15,
-       backgroundColor: '#2a368f',
+       backgroundColor: '#2A368F',
        alignItems:'center',
        flex: 1,
     },
@@ -147,19 +139,25 @@ const styles = StyleSheet.create ({
         padding: 20,
     },
     secondcontainer:{
-        flex:0.4,
+        flex:0.5,
         alignItems:'center',
     },
     ThirdContainer:{
-        flex:0.2,
+        flex:0.1,
         alignItems:'center',
-        marginTop:20,
+    },
+    loginContainer:{
+        flex: 1,
+        flexDirection: 'row',
+        marginHorizontal:5,
+        height: 50,
+        width:300,
     },
     TextLink:{
-        marginTop: 20,
-            fontSize: 18,
+            marginTop: 5,
+            fontSize: 16,
             color: '#ffff',
-            borderBottomColor:'#f9db04',
+            borderBottomColor:'#F9DB04',
             borderBottomStartRadius:1,
     },
     logostyle:{
@@ -170,15 +168,13 @@ const styles = StyleSheet.create ({
     },
     innercontainer:{
         flexDirection:'column',
-        
     },
     logoText:{
-        color: '#f9db04',
+        color: '#F9DB04',
         fontSize: 28,
         fontWeight: 'bold',
         alignItems: 'center',
         paddingTop:10,
-        
     },
     logoSubText: {
         color: '#ffff',
@@ -189,29 +185,38 @@ const styles = StyleSheet.create ({
     },
     LogButtonStyle :{
         backgroundColor: '#ffff',
-        color:'#2a368f',
+        color:'#2A368F',
         fontWeight:'bold',
         padding: 15,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 8,
         marginVertical:5,
-        height: 50,
+        height: 40,
         width:300,
-        marginHorizontal:5,
+        marginHorizontal:8,
     },
     RegButtonStyle:{
-        backgroundColor: '#f9db04',
-        color:'#2a368f',
+        backgroundColor: '#F9DB04',
+        color:'#2A368F',
         fontWeight:'bold',
         padding: 15,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 8,
         marginVertical:5,
-        height: 50,
+        height: 40,
         width:300,
-        marginHorizontal:5,
-
-    }
+        marginHorizontal:8,
+    },
+    Input: {
+        height: 40,
+        width: '100%',
+        margin: 12,
+        borderWidth: 1,
+        padding: 10,
+        color: '#F9DB04',
+        fontSize: 18,
+        borderColor: '#ffff',
+      },
 })
