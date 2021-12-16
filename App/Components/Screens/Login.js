@@ -71,7 +71,7 @@ export default function Login() {
                   <Text style = {styles.logoSubText}>Account Login</Text>
                 </View>
             </View>
-            <View style = {styles.secondcontainer}>
+           <View style = {styles.secondcontainer}>
                 <View style = {styles.loginContainer}>
                     <Icon name='user'  size={24} color='#F9DB04'
                     style = {{flex: 0.1, marginTop:15}}/>
@@ -86,20 +86,23 @@ export default function Login() {
                     <TextInput placeholder='Password'
                     placeholderTextColor = '#F9DB04'
                     secureTextEntry={true}
-                    style = {styles.Input} autoComplete = 'off'
+                    style = {styles.Input}  autoComplete = 'off'
                     />
                 </View>
+
             <TouchableOpacity
               style = {{alignItems:'flex-start'}}>
                 <View style = {styles.LogButtonStyle}>
-                    <Text style = {{color:'#2A368F', fontSize:18}}>Login</Text>
+                    <Text style= {styles.ButtonLabel}
+                    style = {{color:'#2A368F'}}>Login</Text>
                 </View>
             </TouchableOpacity>
+
             <TouchableOpacity
               onPress ={()=>navigation.navigate("SignUp")}
               style = {{alignItems:'flex-start'}}>
                 <View style = {styles.RegButtonStyle}>
-                    <Text style = {{color:'#2A368F', fontSize:18}}>SignUp</Text>
+                    <Text style = {{color:'#2A368F'}}>SignUp</Text>
                 </View>
             </TouchableOpacity>
             </View>
@@ -132,19 +135,19 @@ const styles = StyleSheet.create ({
         padding: 20,
     },
     secondcontainer:{
-        flex:0.5,
+        flex:0.38,
         alignItems:'center',
+        width:'100%',
+        padding:20,
     },
     ThirdContainer:{
-        flex:0.1,
+        flex:0.2,
         alignItems:'center',
     },
     loginContainer:{
         flex: 1,
         flexDirection: 'row',
-        marginHorizontal:5,
-        height: 50,
-        width:300,
+        height: 50
     },
     TextLink:{
             marginTop: 5,
@@ -178,17 +181,24 @@ const styles = StyleSheet.create ({
     },
     LogButtonStyle :{
         backgroundColor: '#ffff',
-        color:'#2A368F',
+        color:'#000',
         fontWeight:'bold',
         padding: 15,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 8,
         marginVertical:5,
-        height: 40,
+        height: 50,
         width:300,
         marginHorizontal:8,
     },
+
+    ButtonLabel:{
+        color:'#fff',
+        fontSize: 14,
+        padding:50
+    },
+
     RegButtonStyle:{
         backgroundColor: '#F9DB04',
         color:'#2A368F',
@@ -198,18 +208,19 @@ const styles = StyleSheet.create ({
         alignItems: 'center',
         borderRadius: 8,
         marginVertical:5,
-        height: 40,
+        height: 50,
         width:300,
         marginHorizontal:8,
     },
     Input: {
         height: 40,
-        width: '100%',
         margin: 12,
         borderWidth: 1,
         padding: 10,
         color: '#F9DB04',
         fontSize: 18,
         borderColor: '#ffff',
+        flex:0.9
       },
+
 })

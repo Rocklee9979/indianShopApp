@@ -13,17 +13,23 @@ import { useNavigation } from '@react-navigation/native';
 import MainTitle from '../Common/MainTitle';
 import SubTitle from '../Common/SubTitle';
 import * as Animatable from 'react-native-animatable';
-//import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-//import { useTheme } from '@react-navigation/native';
+
+const WooCommerceAPI = require("../../lib/APIHelper");
+
 
 export default function Home() {
-    //const { colors } = useTheme();
     const navigation = useNavigation();
 
 
      function componentDidMount(){
-            console.log("Mounting login component");
-            alert("functioning tab")
+
+       WooCommerceAPI.get('products')
+                 .then(data => {
+                 	console.log(data);
+                 })
+                 .catch(error => {
+                 	console.log(error);
+                 });
         }
 
     return (
