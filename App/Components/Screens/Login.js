@@ -89,7 +89,7 @@ export default function Login() {
                     style = {styles.Input}  autoComplete = 'off'
                     />
                 </View>
-
+           
             <TouchableOpacity
               style = {{alignItems:'flex-start'}}>
                 <View style = {styles.LogButtonStyle}>
@@ -97,6 +97,7 @@ export default function Login() {
                     style = {{color:'#2A368F'}}>Login</Text>
                 </View>
             </TouchableOpacity>
+           
 
             <TouchableOpacity
               onPress ={()=>navigation.navigate("SignUp")}
@@ -135,7 +136,7 @@ const styles = StyleSheet.create ({
         padding: 20,
     },
     secondcontainer:{
-        flex:0.38,
+        flex:0.6,
         alignItems:'center',
         width:'100%',
         padding:20,
@@ -157,13 +158,14 @@ const styles = StyleSheet.create ({
             borderBottomStartRadius:1,
     },
     logostyle:{
-        width: 150,
-        height:150,
+        width: 100,
+        height:100,
         position: 'relative',
         zIndex: 999,
     },
     innercontainer:{
         flexDirection:'column',
+        alignItems: 'center',
     },
     logoText:{
         color: '#F9DB04',
