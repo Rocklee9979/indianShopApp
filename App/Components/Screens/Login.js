@@ -99,6 +99,7 @@ export default function Login() {
             </TouchableOpacity>
            
 
+
             <TouchableOpacity
               onPress ={()=>navigation.navigate("SignUp")}
               style = {{alignItems:'flex-start'}}>
