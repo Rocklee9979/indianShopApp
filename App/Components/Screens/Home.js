@@ -20,6 +20,13 @@ import * as Animatable from 'react-native-animatable';
 export default function Home() {
     //const { colors } = useTheme();
     const navigation = useNavigation();
+
+
+     function componentDidMount(){
+            console.log("Mounting login component");
+            alert("functioning tab")
+        }
+
     return (
         <View style={styles.container}>
             <StatusBar backgroundColor='#2a368f' barStyle="dark-content"/>

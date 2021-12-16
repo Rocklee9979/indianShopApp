@@ -13,8 +13,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import { Input,Button } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 
-import axios from 'axios';
-const baseUrl = 'http://localhost:3000/tb_users_login';
+const api_helper = require("../../lib/APIHelper")
 
 export default function Login() {
     const navigation = useNavigation();
@@ -26,10 +25,13 @@ export default function Login() {
     const [iconColorPass, setIconColorPass] = useState("#2a368f");
     const [valIconPass, setValIconPass] = useState("");
 
-   
-    
+    function componentDidMount(){
+        console.log("Mounting login component");
+        alert("functioning tab")
+    }
 
     function SubmitLoginForm(){
+
         if(userName=="" || Password =="")
         {
             alert("erroorrr");
@@ -39,18 +41,10 @@ export default function Login() {
             user_name: userName,
             user_pass: Password
         };
-
-        axios.post(baseUrl, userObject)
-            .then((res) => {
-                console.log(res.data)
-            }).catch((error) => {
-                console.log(error)
-            });
-            setUserName('');
-            setPassword('');
         }
-        
     }
+
+
     function handleChangeEmail(e)
     {
       let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
@@ -105,8 +99,8 @@ export default function Login() {
                     <AntDesign  name= {valIcon} size={18} color={iconColor}/>}
             />
 
-            <Input placeholder="Password" 
-                secureTextEntry={true} 
+            <Input placeholder="Password"
+                secureTextEntry={true}
                 placeholderTextColor = '#f9db04'
                 keyboardType = 'email-address'
                 onChangeText={text => setPassword(text),
@@ -114,7 +108,7 @@ export default function Login() {
                 //onBlur = {handleBlur('email')}
                 //value = {values.email}
                 leftIcon={
-                <Icon name='lock'  size={24} color='#f9db04' />} 
+                <Icon name='lock'  size={24} color='#f9db04' />}
                 rightIcon={
                     <AntDesign  name= {valIconPass} size={18} color={iconColorPass}/>}
             />
@@ -122,7 +116,7 @@ export default function Login() {
             <Button 
                 title="Login"   
                 type="clear"
-                onPress = {()=>SubmitLoginForm()} 
+                onPress = {()=>SubmitLoginForm()}
                 style = {styles.LogButtonStyle} />
             <Button 
                 title="SignUp Now"   
