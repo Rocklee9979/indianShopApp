@@ -1,10 +1,10 @@
-const API_HOST_NAME = "http://localhost/wordpress"
+const API_HOST_NAME = "https://pharsathapa.com"
 const API_VERSION = 'v3';
 const API_BASE = API_HOST_NAME + '/api/' + API_VERSION;
 
 const API_KEYS = {
-    consumer_key : "ck_29c3e5c67805a0f0c57f6dc094acbc342ea579d3",
-    consumer_secret : "cs_d2199829d332a75f0e940ee42eb9daaa3fc86ec5"
+    consumer_key : "ck_71271097945756064cc68480d14695e1838c6527",
+    consumer_secret : "cs_98200e25d456a28510684c10255628c8a57b556a"
 }
 
 const API_ENDPOINTS = {

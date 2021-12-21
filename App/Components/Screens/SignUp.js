@@ -19,6 +19,9 @@ import { useNavigation } from '@react-navigation/native';
   
 export default function SignUp() {
     const navigation = useNavigation();
+    function userRegiter() {
+        
+    }
     return (
         <SafeAreaView style = {styles.container}>
             <ScrollView showsVerticalScrollIndicator = {false} >
@@ -55,9 +58,8 @@ export default function SignUp() {
             secureTextEntry = 'true' 
             />
             
-            
             <TouchableOpacity 
-              onPress ={()=>navigation.navigate("Welcome")}
+              onPress ={userRegiter()}
               style = {{alignItems:'flex-start'}}>
                 <View style = {styles.LogButtonStyle}>
                     <Text style = {{color:'#2a368f', fontSize:18}}>Register</Text>

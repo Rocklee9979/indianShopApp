@@ -14,7 +14,8 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
 import { Button } from 'react-native-elements';
 
-const baseUrl = 'http://localhost:3000/tb_users_login';
+import WooCommerceAPI from '../../lib/APIHelper'
+
 export default function Login() {
     const navigation = useNavigation();
     const [userName, setUserName] = useState("");
@@ -25,6 +26,15 @@ export default function Login() {
     const [valIconPass, setValIconPass] = useState("");
 
     function SubmitLoginForm(){
+        WooCommerceAPI.get('products/')
+                    .then(data => {
+                        alert('hiiiiiii');
+                       console.log(data);
+                    })
+                    .catch(error => {
+                       console.log(error);
+                    });
+
         if(userName=="" || Password ==""){
             alert("erroorrr");
         }
@@ -91,7 +101,8 @@ export default function Login() {
                 </View>
            
             <TouchableOpacity
-              style = {{alignItems:'flex-start'}}>
+              style = {{alignItems:'flex-start'}}
+              onPress={SubmitLoginForm()}>
                 <View style = {styles.LogButtonStyle}>
                     <Text style= {styles.ButtonLabel}
                     style = {{color:'#2A368F'}}>Login</Text>

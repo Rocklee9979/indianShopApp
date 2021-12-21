@@ -2,11 +2,13 @@ import React from 'react';
 import { View, Text,StatusBar,StyleSheet } from 'react-native';
 import Header from '../Common/Header';
 import SearchBar from '../Common/SearchBar';
+import HomeCategory from '../Common/HomeCategory'
 export default function DashBoard() {
     return (
         <View style = {styles.container}>
             <Header/>
             <SearchBar/>
+            <HomeCategory/>
             
         </View>
     )

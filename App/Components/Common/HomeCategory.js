@@ -4,11 +4,9 @@ import  Icon  from 'react-native-vector-icons/Fontisto';
 
 export default function HomeCategory() {
     return (
-        <View style = {styles.container}>
-        <View style = {styles.categoryContainer}>
+        <View style = {styles.container} >
+        <View style = {styles.categoryContainer} >
              <Icon name="test-bottle" size={30} color="#000066"  style = {styles.catIconStyle}/>
-            
-            
         </View>
         <Text style = {styles.categotyName}>Spices</Text>
         </View>
