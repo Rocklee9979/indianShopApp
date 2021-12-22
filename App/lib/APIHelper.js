@@ -3,7 +3,7 @@ var { API_ENDPOINTS, API_HEADERS, API_VERSION, API_HOST_NAME, API_KEYS } = requi
 var WooCommerceAPI = require('react-native-woocommerce-api');
 
 WooCommerceAPI = new WooCommerceAPI({
-    url: "https://pharsathapa.com",
+    url: API_HOST_NAME,
     ssl: true,
     consumerKey: API_KEYS.consumer_key,
     consumerSecret: API_KEYS.consumer_secret,
