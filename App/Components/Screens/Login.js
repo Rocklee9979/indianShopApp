@@ -11,16 +11,20 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { useNavigation } from '@react-navigation/native';
 import { Button } from 'react-native-elements';
 import { useValidation } from 'react-native-form-validator';
+import { useNavigation } from '@react-navigation/native'
+import axios from 'axios'
 
+import MessageWraper from '../Common/MessageWraper';
 import WooCommerceAPI from '../../lib/APIHelper'
+
+var { API_HOST_NAME } = require("../../config/APIConfig");
 
 export default function Login() {
     const navigation = useNavigation();
-    const [userName, setUserName] = useState("");
-    const [password, setPassword] = useState("");
+    const [userName, setUserName] = useState("suresh-thapa");
+    const [password, setPassword] = useState("p@sword");
 
     const { validate, isFieldInError, getErrorsInField, getErrorMessages } =
         useValidation({
@@ -29,8 +33,21 @@ export default function Login() {
 
     const SubmitLoginForm = () => {
     validate({
-      userName: { email: true, required:true },
-      password: {},
+      userName: {  required:true },
+      password: { required:true },
+    });
+
+    axios.post(API_HOST_NAME + '/wp-json/jwt-auth/v1/token', {
+      username: userName,
+      password: password
+    })
+    .then((response) => {
+      console.log(response.status);
+      console.log("login successful")
+      navigation.push("UserDashBoard")
+
+    }, (error) => {
+      console.log(error);
     });
 
     }
@@ -75,20 +92,25 @@ export default function Login() {
                 <View style = {styles.loginContainer}>
                     <Icon name='user'  size={24} color='#F9DB04'
                     style = {{flex: 0.1, marginTop:15}}/>
+
                     <TextInput placeholder='Email'
                     placeholderTextColor = '#F9DB04'
                     style = {styles.Input} autoComplete = 'off'
                     onChangeText={setUserName} value={userName}
                     key = 'userName'
                     />
-                    {isFieldInError('userName') &&
-                            getErrorsInField('userName').map((errorMessage, index) => (
-                    <Text key = {'userNameError'+ index }>{errorMessage}</Text>
-                    ))}
+
                 </View>
+                {isFieldInError('userName') &&
+                        getErrorsInField('userName').map((errorMessage, index) => (
+                        <MessageWraper key = {'userNameError'+ index }>{errorMessage}</MessageWraper>
+                ))}
+
+
                 <View style = {styles.loginContainer}>
                     <Icon name='lock'  size={24} color='#F9DB04'
                     style = {{flex: 0.1, marginTop:15}}/>
+
                     <TextInput placeholder='Password'
                     placeholderTextColor = '#F9DB04'
                     secureTextEntry={true}
@@ -96,13 +118,13 @@ export default function Login() {
                     style = {styles.Input}  autoComplete = 'off'
                     key = 'password'
                     />
-                    {isFieldInError('passsword') &&
-                            getErrorsInField('password').map((errorMessage, index) => (
-                              <Text key = {'passwordError'+ index }>{errorMessage}</Text>
-                    ))}
-                </View>
 
-           
+                </View>
+                 {isFieldInError('password') &&
+                        getErrorsInField('password').map((errorMessage, index) => (
+                        <MessageWraper key = {'passwordError'+ index }>{errorMessage}</MessageWraper>
+                ))}
+
             <TouchableOpacity
               style = {{alignItems:'flex-start'}}
               onPress={SubmitLoginForm}>
@@ -157,6 +179,7 @@ const styles = StyleSheet.create ({
         alignItems:'center',
         width:'100%',
         padding:20,
+        overflow:'hidden'
     },
     ThirdContainer:{
         flex:0.2,

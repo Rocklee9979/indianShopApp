@@ -11,7 +11,8 @@ import Cart from '../Screens/Cart';
 import List from '../Screens/List';
 import Checkout from '../Screens/Checkout';
 import Settings from '../Screens/Settings';
-import UserDashBoard from '../Screens/UserDashBoard';
+
+import UserDashBoard from '../Screens/UserDashBoard'
 
 //import BottomNavigator from './BottomNavigator';
 
@@ -30,7 +31,11 @@ export default function AppNavigator() {
             <Stack.Screen name="List" component={List} />
             <Stack.Screen name="Checkout" component={Checkout} />
             <Stack.Screen name="Settings" component={Settings} />
+<<<<<<< HEAD
             <Stack.Screen name="UserDashBoard" component ={UserDashBoard} />
+=======
+            <Stack.Screen name="UserDashBoard" component={UserDashBoard} />
+>>>>>>> a815181b0ccafea4c1b546af43e54dda2eeedde8
         </Stack.Navigator>
     )
 }
