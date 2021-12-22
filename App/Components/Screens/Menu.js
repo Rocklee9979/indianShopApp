@@ -99,7 +99,10 @@ export default function Menu() {
                     
                     }}>
                    
-                        <TouchableOpacity style = {styles.Content}>
+                        <TouchableOpacity 
+                            style = {styles.Content}
+                            onPress={()=>navigation.navigate("UserDashBoard")}
+                            >
                             <Text style = {styles.subText}> DashBoard</Text>
                             <View style = {styles.seperator}/>
                         </TouchableOpacity>

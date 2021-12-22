@@ -14,9 +14,9 @@ import MainTitle from '../Common/MainTitle';
 import MessageWraper from '../Common/MessageWraper';
 import { useNavigation } from '@react-navigation/native';
 import { useValidation } from 'react-native-form-validator';
+import WooCommerceAPI from '../../lib/APIHelper';
 
 
-  
 export default function SignUp() {
     const navigation = useNavigation();
 
@@ -32,6 +32,14 @@ export default function SignUp() {
         state: { FirstName, LastName, Phone, Email, Username, Password}
       });
     const submitRegistrationForm = ()=> {
+
+        const data = {
+            email: Email,
+            first_name: FirstName,
+            last_name: LastName,
+            username: Username,
+            password: Password
+            }
        
         validate({
             FirstName: { required: true },
@@ -41,6 +49,17 @@ export default function SignUp() {
             Username: { required: true, minlength: 5 },
             Password: { required: true, minlength: 5, maxlength: 8},
           })
+          if(!getErrorMessages =="")
+          { 
+            WooCommerceAPI.post("customers", data)
+            .then((response) => {
+             console.log(response);
+             navigation.push("Login");
+            })
+            .catch((error) => {
+              console.log(error.response);
+            });
+          }
     }
 
     

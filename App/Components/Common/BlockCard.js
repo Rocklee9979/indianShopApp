@@ -1,17 +1,17 @@
 import React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
-import Title from './Title';
-import SubTitle from './SubTitle';
+import Title from '../Common/Title';
+import SubTitle from '../Common/SubTitle';
 
-export default function BlockCard({style,imageStyle,contentContainerStyle}) {
+export default function BlockCard({style,imageStyle,contentContainerStyle,defaultColor}) {
     return (
         
         <View style = {[styles.container, style]}>
-           <Image source = {require('../../assets/images/featured.jpg')} style = {[styles.image, imageStyle]}/>
-           <View style = {[styles.contentContainer,contentContainerStyle]}>
-               <Title>Indian Spices</Title>
-               <SubTitle>A little cayenne pepper certainly goes a long way – just a pinch can add heat to an entire pot of curry.</SubTitle>
+            <View style = {[styles.contentContainer,contentContainerStyle]}>
+               <Title defaultColor = '#2a368f'>Indian Spices</Title>
            </View>
+           <Image source = {require('../../../assets/images/Special.jpg')} style = {[styles.image, imageStyle]}/>
+           
         </View>
     )
 }
@@ -28,10 +28,10 @@ const styles = StyleSheet.create({
         
         height: 200,
         position: 'absolute',
-        top:20,
-        right:20,
-        left:20,
-        bottom:20,
+        top:30,
+        right:30,
+        left:30,
+        bottom:50,
     },
     contentContainer: {
         paddingLeft: 10,
