@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,useState } from 'react';
 import { View,
         StyleSheet, 
         StatusBar,
@@ -10,18 +10,40 @@ import { View,
         ScrollView,
         TouchableOpacity
     } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { Input,Button } from 'react-native-elements';
 import MainTitle from '../Common/MainTitle';
+import MessageWraper from '../Common/MessageWraper';
 import { useNavigation } from '@react-navigation/native';
+import { useValidation } from 'react-native-form-validator';
 
 
   
 export default function SignUp() {
     const navigation = useNavigation();
-    function userRegiter() {
-        
+
+    const [FirstName, setTextInputFname] = useState('');
+    const [LastName, setTextInputLname] = useState('');
+    const [Phone, setTextInputPhone] = useState('');
+    const [Email, setTextInputEmail] = useState('');
+    const [Username, setTextInputUsername] = useState('');
+    const [Password, setTextInputPassword] = useState('');
+
+   
+    const {validate, isFieldInError, getErrorsInField, getErrorMessages } = useValidation({
+        state: { FirstName, LastName, Phone, Email, Username, Password}
+      });
+    const submitRegistrationForm = ()=> {
+       
+        validate({
+            FirstName: { required: true },
+            LastName: { required: true },
+            Phone: { numbers: true, required: true },
+            Email: { required: true, email: true },
+            Username: { required: true, minlength: 5 },
+            Password: { required: true, minlength: 5, maxlength: 8},
+          })
     }
+
+    
     return (
         <SafeAreaView style = {styles.container}>
             <ScrollView showsVerticalScrollIndicator = {false} >
@@ -32,34 +54,70 @@ export default function SignUp() {
             <TextInput placeholder='First Name' placeholderTextColor = '#f2f2f2'
             style = {styles.Input} autoComplete = 'off'
             autoCapitalize = 'words'
+            onChangeText={(val)=> setTextInputFname(val)}
+            value={FirstName}
             />
+            {isFieldInError('FirstName') &&
+            getErrorsInField('FirstName').map(errorMessage => (
+                  <MessageWraper>{errorMessage}</MessageWraper>
+             ))}
             <TextInput placeholder='Last Name' placeholderTextColor = '#f2f2f2'
             style = {styles.Input}
             autoComplete = 'off' 
             autoCapitalize = 'words'
+            onChangeText={(val)=> setTextInputLname(val)}
+            value={LastName}
             />
+            {isFieldInError('LastName') &&
+            getErrorsInField('LastName').map(errorMessage => (
+                  <MessageWraper>{errorMessage}</MessageWraper>
+             ))}
             <TextInput placeholder='Email' placeholderTextColor = '#f2f2f2'
             style = {styles.Input}
-            autoComplete = 'off'  
+            autoComplete = 'off'
+            onChangeText={(val)=> setTextInputEmail(val)}
+            value={Email}
             />
+            {isFieldInError('Email') &&
+            getErrorsInField('Email').map(errorMessage => (
+                  <MessageWraper>{errorMessage}</MessageWraper>
+             ))}
             <TextInput placeholder='Phone Number' placeholderTextColor = '#f2f2f2'
             style = {styles.Input}
             autoComplete = 'off' 
-            textContentType = 'telephoneNumber' 
+            textContentType = 'telephoneNumber'
+            onChangeText={(val)=> setTextInputPhone(val)}
+            value={Phone} 
             />
+             {isFieldInError('Phone') &&
+            getErrorsInField('Phone').map(errorMessage => (
+                  <MessageWraper>{errorMessage}</MessageWraper>
+             ))}
             <TextInput placeholder='Username' placeholderTextColor = '#f2f2f2'
             style = {styles.Input}
             autoComplete = 'off'  
             autoCapitalize = 'none'
+            onChangeText={(val)=> setTextInputUsername(val)} 
+            value={Username}
             />
+             {isFieldInError('Username') &&
+            getErrorsInField('Username').map(errorMessage => (
+                  <MessageWraper>{errorMessage}</MessageWraper>
+             ))}
             <TextInput placeholder='Password' placeholderTextColor = '#f2f2f2'
             style = {styles.Input}
             autoComplete = 'off'
             secureTextEntry = 'true' 
+            onChangeText={(val)=> setTextInputPassword(val)} 
+            value={Password}
             />
+             {isFieldInError('Password') &&
+            getErrorsInField('Password').map(errorMessage => (
+                  <MessageWraper>{errorMessage}</MessageWraper>
+             ))}
             
             <TouchableOpacity 
-              onPress ={userRegiter()}
+              onPress ={submitRegistrationForm}
               style = {{alignItems:'flex-start'}}>
                 <View style = {styles.LogButtonStyle}>
                     <Text style = {{color:'#2a368f', fontSize:18}}>Register</Text>
@@ -75,8 +133,6 @@ export default function SignUp() {
 
 
 const {height} = Dimensions.get("screen");
-
-
 
 const styles = StyleSheet.create ({
     container: {
