@@ -13,37 +13,26 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
 import { Button } from 'react-native-elements';
+import { useValidation } from 'react-native-form-validator';
 
 import WooCommerceAPI from '../../lib/APIHelper'
 
 export default function Login() {
     const navigation = useNavigation();
     const [userName, setUserName] = useState("");
-    const [Password, setPassword] = useState("");
-    const [iconColor, setIconColor] = useState("#2A368F");
-    const [valIcon, setValIcon] = useState("");
-    const [iconColorPass, setIconColorPass] = useState("#2A368F");
-    const [valIconPass, setValIconPass] = useState("");
+    const [password, setPassword] = useState("");
 
-    function SubmitLoginForm(){
-        WooCommerceAPI.get('products/')
-                    .then(data => {
-                        alert('hiiiiiii');
-                       console.log(data);
-                    })
-                    .catch(error => {
-                       console.log(error);
-                    });
+    const { validate, isFieldInError, getErrorsInField, getErrorMessages } =
+        useValidation({
+          state: { userName, password },
+        });
 
-        if(userName=="" || Password ==""){
-            alert("erroorrr");
-        }
-        else{
-            const userObject = {
-                user_name: userName,
-                user_pass: Password
-            }
-        }
+    const SubmitLoginForm = () => {
+    validate({
+      userName: { email: true, required:true },
+      password: {},
+    });
+
     }
 
     function handleChangeEmail(e)
@@ -71,6 +60,7 @@ export default function Login() {
             setValIconPass('checkcircleo');
         }
     }
+
     return (
         <View style = {styles.container}>
             <StatusBar backgroundColor='#2A368F' barStyle="dark-content"/>
@@ -88,7 +78,13 @@ export default function Login() {
                     <TextInput placeholder='Email'
                     placeholderTextColor = '#F9DB04'
                     style = {styles.Input} autoComplete = 'off'
+                    onChangeText={setUserName} value={userName}
+                    key = 'userName'
                     />
+                    {isFieldInError('userName') &&
+                            getErrorsInField('userName').map((errorMessage, index) => (
+                    <Text key = {'userNameError'+ index }>{errorMessage}</Text>
+                    ))}
                 </View>
                 <View style = {styles.loginContainer}>
                     <Icon name='lock'  size={24} color='#F9DB04'
@@ -96,13 +92,20 @@ export default function Login() {
                     <TextInput placeholder='Password'
                     placeholderTextColor = '#F9DB04'
                     secureTextEntry={true}
+                    onChangeText={setPassword} value={password}
                     style = {styles.Input}  autoComplete = 'off'
+                    key = 'password'
                     />
+                    {isFieldInError('passsword') &&
+                            getErrorsInField('password').map((errorMessage, index) => (
+                              <Text key = {'passwordError'+ index }>{errorMessage}</Text>
+                    ))}
                 </View>
+
            
             <TouchableOpacity
               style = {{alignItems:'flex-start'}}
-              onPress={SubmitLoginForm()}>
+              onPress={SubmitLoginForm}>
                 <View style = {styles.LogButtonStyle}>
                     <Text style= {styles.ButtonLabel}
                     style = {{color:'#2A368F'}}>Login</Text>
@@ -134,6 +137,8 @@ export default function Login() {
         </View>
     )
 }
+
+
 const styles = StyleSheet.create ({
     container: {
        marginTop: StatusBar.currentHeight,
