@@ -13,11 +13,14 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+import Header from '../Common/Header';
+
 export default function UserDashBoard() {
     return (
         <SafeAreaView style = {{flex:1}}>
             <View style = {styles.container}>
                 <ScrollView>
+                <Header/>
 
                 </ScrollView>
             </View>
