@@ -5,13 +5,19 @@ import SubTitle from './SubTitle';
 
 export default function FlatCard({products}) {
 
-    return (
+    const [productList, setProductList] = useState([products]);
+
+    useEffect(() => {
+        setProductList(products);
+    });
+
+   return (
        <>
-            { products.map((product, index) => {
+            { productList.map((product, index) => {
                 <View style = {styles.container} key={index}>
                    <Image source = {require('../../../assets/images/featured.jpg')} style = {styles.image}/>
                    <View style = {styles.contentContainer}>
-                       <Title>{ product.name }</Title>
+                       <Title>{ product.name}</Title>
                        <SubTitle>A little cayenne pepper certainly goes a long way – just a pinch can add heat to an entire pot of curry.</SubTitle>
                    </View>
                 </View>

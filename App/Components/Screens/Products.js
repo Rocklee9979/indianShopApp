@@ -25,14 +25,13 @@ export default function Products() {
     const [productList, setProductList] = useState([]);
 
     const fetchProducts = async() =>{
-           WooCommerceAPI.get("products")
-           .then((response) => {
-               console.log(response);
-               setProductList(response)
-           })
-           .catch((error) => {
-               console.log(error.response);
-           });
+           await WooCommerceAPI.get("products")
+               .then((response) => {
+                   setProductList(response)
+               })
+               .catch((error) => {
+                   console.log(error.response);
+               });
     }
 
     useEffect(() => {
@@ -48,8 +47,9 @@ export default function Products() {
                     <SearchBar/>
                 </View>
                  <View>
-
-                 <FlatCard products = { productList }/>
+                    { productList.map((product, index) => {
+                        <Title>{ product.name}</Title>
+                     })}
                  </View>
             </ScrollView>
         </SafeAreaView>
