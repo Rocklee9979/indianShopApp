@@ -1,20 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import Title from './Title';
 import SubTitle from './SubTitle';
 
-export default function FlatCard() {
+export default function FlatCard({products}) {
+
     return (
-        <>
-        
-        <View style = {styles.container}>
-           <Image source = {require('../../assets/images/featured.jpg')} style = {styles.image}/>
-           <View style = {styles.contentContainer}>
-               <Title>Indian Spices</Title>
-               <SubTitle>A little cayenne pepper certainly goes a long way – just a pinch can add heat to an entire pot of curry.</SubTitle>
-           </View>
-        </View>
-        </>
+       <>
+            { products.map((product, index) => {
+                <View style = {styles.container} key={index}>
+                   <Image source = {require('../../../assets/images/featured.jpg')} style = {styles.image}/>
+                   <View style = {styles.contentContainer}>
+                       <Title>{ product.name }</Title>
+                       <SubTitle>A little cayenne pepper certainly goes a long way – just a pinch can add heat to an entire pot of curry.</SubTitle>
+                   </View>
+                </View>
+
+             })}
+       </>
     )
 }
 

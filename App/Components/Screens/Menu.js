@@ -128,7 +128,9 @@ export default function Menu() {
             </View>
             </View>
 
-            <TouchableOpacity style = {styles.MenuItem}>
+            <TouchableOpacity style = {styles.MenuItem}
+                onPress= {()=>navigation.navigate("Products")}
+            >
                 <Icon name = "shopping-basket" size={30}  color = {'#2a368f'} />
                 <Text style = {styles.MenuItemText}> Products</Text>
             </TouchableOpacity>

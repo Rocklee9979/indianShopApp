@@ -42,9 +42,12 @@ export default function Login() {
       password: password
     })
     .then((response) => {
-      console.log(response.status);
-      console.log("login successful")
-      navigation.push("UserDashBoard")
+        if(response.status == 200){
+            console.log("login successful")
+            navigation.push("UserDashBoard")
+        }else{
+            console.log("Failed to login")
+        }
 
     }, (error) => {
       console.log(error);
