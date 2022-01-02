@@ -22,38 +22,57 @@ import MessageWraper from '../Common/MessageWraper';
 import WooCommerceAPI from '../../lib/APIHelper'
 
 export default function Products() {
-    const [productList, setProductList] = useState([]);
-
-    const fetchProducts = async() =>{
-           await WooCommerceAPI.get("products")
-               .then((response) => {
-                   setProductList(response)
-               })
-               .catch((error) => {
-                   console.log(error.response);
-               });
-    }
+    const [ productList, setProductList ] = useState(null);
+    const [ isLoading, setIsLoading ] = useState(true)
 
     useEffect(() => {
-        fetchProducts();
-      }, []);
 
+    (async () => {
+        try {
+            await Promise.all([
+              WooCommerceAPI.get("products")])
+             .then((response) => {
+               setProductList(response[0])
+               setIsLoading(false)
+             })
+           }
+          catch(error){
+              console.log(error.response);
+          }
+
+      })()
+    }, [setProductList]);
+
+    if(isLoading){
+      return (
+        <View>
+          <Text> Loading Products . . . </Text>
+        </View>
+      );
+
+    }
 
     return (
-        <SafeAreaView style = {styles.container}>
-            <ScrollView showsVerticalScrollIndicator = {false}>
-                <Header/>
-                <View style = {styles.searchBarContainer}>
-                    <SearchBar/>
-                </View>
-                 <View>
-                    { productList.map((product, index) => {
-                        <Title>{ product.name}</Title>
-                     })}
-                 </View>
-            </ScrollView>
-        </SafeAreaView>
+      <SafeAreaView style = {styles.container}>
+          <ScrollView showsVerticalScrollIndicator = {false}>
+              <Header/>
+              <View style = {styles.searchBarContainer}>
+                  <SearchBar/>
+              </View>
+
+
+              { productList.map(function(product){
+                  return (
+                    <FlatCard product = { product } key = { product.id }/>
+                  )
+              })}
+
+          </ScrollView>
+      </SafeAreaView>
     )
+
+
+
 }
 
 const styles = StyleSheet.create ({

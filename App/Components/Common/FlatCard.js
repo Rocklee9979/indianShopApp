@@ -1,28 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Image } from 'react-native';
+import RenderHTML from "react-native-render-html";
+
 import Title from './Title';
 import SubTitle from './SubTitle';
 
-export default function FlatCard({products}) {
+export default function FlatCard({ product }) {
 
-    const [productList, setProductList] = useState([products]);
+    const [productItem, setProductItem] = useState([product]);
 
-    useEffect(() => {
-        setProductList(products);
-    });
+    const source = {
+        html: `
+          <p style='text-align:center;'>`
+            + product.description +
+          `</p>`
+      };
 
-   return (
+      const image_url = { uri :
+                          ( product.images.length  == 0 )
+                          ? "https://pharsathapa.com/wp-content/uploads/woocommerce-placeholder.png"
+                          : product.images[0].src
+                        }
+
+    return (
        <>
-            { productList.map((product, index) => {
-                <View style = {styles.container} key={index}>
-                   <Image source = {require('../../../assets/images/featured.jpg')} style = {styles.image}/>
-                   <View style = {styles.contentContainer}>
-                       <Title>{ product.name}</Title>
-                       <SubTitle>A little cayenne pepper certainly goes a long way – just a pinch can add heat to an entire pot of curry.</SubTitle>
-                   </View>
-                </View>
+            <View style = {styles.container} >
+                 <Image source = { image_url } style = {styles.image}/>
+                 <View style = {styles.contentContainer}>
+                     <Title> { product.name }</Title>
+                     <SubTitle>
+                     <RenderHTML source = { source } />
 
-             })}
+                     </SubTitle>
+                 </View>
+              </View>
        </>
     )
 }
@@ -39,7 +50,7 @@ const styles = StyleSheet.create({
         marginTop:15,
     },
     image: {
-        
+
         flex: 0.35,
         height:'100%',
 
