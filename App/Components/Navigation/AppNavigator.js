@@ -5,6 +5,7 @@ import Home from '../Screens/Home';
 import Login from '../Screens/Login';
 import SignUp from '../Screens/SignUp';
 import DashBoard from '../Screens/DashBoard';
+import Products from '../Screens/Products';
 import Welcome from '../Screens/Welcome';
 import Menu from '../Screens/Menu';
 import Cart from '../Screens/Cart';
@@ -31,6 +32,7 @@ export default function AppNavigator() {
             <Stack.Screen name="List" component={List} />
             <Stack.Screen name="Checkout" component={Checkout} />
             <Stack.Screen name="Settings" component={Settings} />
+            <Stack.Screen name="Products" component={Products} />
             <Stack.Screen name="UserDashBoard" component={UserDashBoard} />
         </Stack.Navigator>
     )

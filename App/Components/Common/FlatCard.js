@@ -1,20 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Image } from 'react-native';
+import RenderHTML from "react-native-render-html";
+
 import Title from './Title';
 import SubTitle from './SubTitle';
 
-export default function FlatCard() {
+export default function FlatCard({ product }) {
+
+    const [productItem, setProductItem] = useState([product]);
+
+    const source = {
+        html: `
+          <p style='text-align:center;'>`
+            + product.description +
+          `</p>`
+      };
+
+      const image_url = { uri :
+                          ( product.images.length  == 0 )
+                          ? "https://pharsathapa.com/wp-content/uploads/woocommerce-placeholder.png"
+                          : product.images[0].src
+                        }
+
     return (
-        <>
-        
-        <View style = {styles.container}>
-           <Image source = {require('../../assets/images/featured.jpg')} style = {styles.image}/>
-           <View style = {styles.contentContainer}>
-               <Title>Indian Spices</Title>
-               <SubTitle>A little cayenne pepper certainly goes a long way – just a pinch can add heat to an entire pot of curry.</SubTitle>
-           </View>
-        </View>
-        </>
+       <>
+            <View style = {styles.container} >
+                 <Image source = { image_url } style = {styles.image}/>
+                 <View style = {styles.contentContainer}>
+                     <Title> { product.name }</Title>
+                     <SubTitle>
+                     <RenderHTML source = { source } />
+
+                     </SubTitle>
+                 </View>
+              </View>
+       </>
     )
 }
 
@@ -30,7 +50,7 @@ const styles = StyleSheet.create({
         marginTop:15,
     },
     image: {
-        
+
         flex: 0.35,
         height:'100%',
 

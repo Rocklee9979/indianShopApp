@@ -24,7 +24,7 @@ export default function DashBoard() {
                 <View style = {styles.searchBarContainer}>
                     <SearchBar/>
                 </View>
-                
+
                 <View style = {styles.categoryContainer}
                       horizondal showsHorizontalScrollIndicator = {false} >
                    <HomeCategory/>
@@ -34,15 +34,15 @@ export default function DashBoard() {
                     <BlockCard/>
                 </View>
                 <View style = {styles.offerBanner}>
-                    <Image 
-                    source = {require('../../../assets/images/banner-03.jpg')} 
+                    <Image
+                    source = {require('../../../assets/images/banner-03.jpg')}
                     style = { styles.bannerImage}/>
                 </View>
                 <View style = {styles.recentContainer}>
                     <Title >RECENT</Title>
                     <SmallCard/>
                 </View>
-                
+
 
             </ScrollView>
         </SafeAreaView>
