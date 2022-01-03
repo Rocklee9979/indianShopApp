@@ -31,11 +31,7 @@ export default function AppNavigator() {
             <Stack.Screen name="List" component={List} />
             <Stack.Screen name="Checkout" component={Checkout} />
             <Stack.Screen name="Settings" component={Settings} />
-<<<<<<< HEAD
-            <Stack.Screen name="UserDashBoard" component ={UserDashBoard} />
-=======
             <Stack.Screen name="UserDashBoard" component={UserDashBoard} />
->>>>>>> a815181b0ccafea4c1b546af43e54dda2eeedde8
         </Stack.Navigator>
     )
 }
