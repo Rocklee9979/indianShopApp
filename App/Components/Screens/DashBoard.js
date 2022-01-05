@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, 
+import React, { useEffect, useState } from 'react';
+import { View,
     Text,
     StatusBar,
     StyleSheet,
@@ -15,38 +15,98 @@ import BlockCard from '../Common/BlockCard';
 import Title from '../Common/Title';
 import SmallCard from '../Common/SmallCard';
 
+import WooCommerceAPI from '../../lib/APIHelper'
+
 
 export default function DashBoard() {
+
+  const [ categoryList, setCategoryList ] = useState(null);
+  const [ featuredProductList, setFeaturedProductList ] = useState(null);
+  const [ recentProducts, setRecentProducts ] = useState(null);
+  const [ isLoading, setIsLoading ] = useState(true)
+
+  useEffect(() => {
+      (async () => {
+        try {
+          await Promise.all([
+            WooCommerceAPI.get("products/categories", { 'parent' : "0",  "exclude" : "20" }), //json data as 2nd param for get quey strings ; Uncategorised ID excluded
+            WooCommerceAPI.get("products", {"featured" : "true" }),
+            WooCommerceAPI.get("products", {"order" : "asc", "orderby" :'date', "page" : 1, "per_page" : 2 })
+
+          ])
+          .then(([categories, featured, recent ]) => {
+             setCategoryList(categories)
+             setFeaturedProductList(featured)
+             setRecentProducts(recent)
+             setIsLoading(false)
+         })
+        }
+        catch(error){
+            console.log(error.response);
+        }
+
+      })()
+    }, [setCategoryList, setFeaturedProductList, setRecentProducts ]);
+
+
+  if(isLoading){
     return (
-        <SafeAreaView style = {styles.container}>
-            <ScrollView showsVerticalScrollIndicator = {false}>
-                <Header/>
-                <View style = {styles.searchBarContainer}>
-                    <SearchBar/>
-                </View>
+      <View>
+        <Text> Loading Dashboard . . . </Text>
+      </View>
+    );
 
-                <View style = {styles.categoryContainer}
-                      horizondal showsHorizontalScrollIndicator = {false} >
-                   <HomeCategory/>
-                </View>
-                <View style = {styles.specialOffer}>
-                    <Title >SPECIAL OFFERS</Title>
-                    <BlockCard/>
-                </View>
-                <View style = {styles.offerBanner}>
-                    <Image
-                    source = {require('../../../assets/images/banner-03.jpg')}
-                    style = { styles.bannerImage}/>
-                </View>
-                <View style = {styles.recentContainer}>
-                    <Title >RECENT</Title>
-                    <SmallCard/>
-                </View>
+  }
+
+  return (
+      <SafeAreaView style = {styles.container}>
+          <ScrollView showsVerticalScrollIndicator = {false}>
+              <Header/>
+              <View style = {styles.searchBarContainer}>
+                  <SearchBar/>
+              </View>
+
+              <View style = {styles.categoryContainer}
+                    horizondal showsHorizontalScrollIndicator = {false} >
+
+                    { categoryList.map(function(category){
+                        return (
+                          <HomeCategory category = { category } key = { category.id }/>
+                        )
+                    })}
+              </View>
+              <View style = {styles.specialOffer}>
+                  <Title >SPECIAL OFFERS</Title>
+                  { featuredProductList.map(function(product){
+                      return (
+                        <BlockCard product = { product} />
+
+                      )
+                    })}
 
 
-            </ScrollView>
-        </SafeAreaView>
-    )
+              </View>
+              <View style = {styles.offerBanner}>
+                  <Image
+                  source = {require('../../../assets/images/banner-03.jpg')}
+                  style = { styles.bannerImage}/>
+              </View>
+
+
+
+              <View style = {styles.recentContainer}>
+                  <Title >RECENT</Title>
+                  { recentProducts.map(function(product){
+                      return (
+                        <SmallCard  product ={ product } key = {product.id}/>
+                      )
+                  })}
+              </View>
+
+
+          </ScrollView>
+      </SafeAreaView>
+  )
 }
 
 const styles = StyleSheet.create ({

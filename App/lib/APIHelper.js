@@ -10,7 +10,7 @@ WooCommerceAPI = new WooCommerceAPI({
     wpAPI: true,
     version: 'wc/' + API_VERSION,
     queryStringAuth: true
-    
+
 });
 
 module.exports = WooCommerceAPI;

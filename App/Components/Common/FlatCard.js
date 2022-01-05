@@ -7,24 +7,27 @@ import SubTitle from './SubTitle';
 
 export default function FlatCard({ product }) {
 
-    const [productItem, setProductItem] = useState([product]);
+    const [productItem, setProductItem] = useState(product); //for future works 
 
     const source = {
-        html: `
-          <p style='text-align:center;'>`
-            + product.description +
-          `</p>`
-      };
+        html: `<p style='text-align:center;'>`
+              + product.description +
+              `</p>`
+    };
 
-      const image_url = { uri :
-                          ( product.images.length  == 0 )
-                          ? "https://pharsathapa.com/wp-content/uploads/woocommerce-placeholder.png"
-                          : product.images[0].src
-                        }
+    const image_url = { uri :
+                        ( product.images.length  == 0 )
+                        ? "https://pharsathapa.com/wp-content/uploads/woocommerce-placeholder.png"
+                        : product.images[0].src
+                      }
+
+    const loadDetail = (id) => {
+        console.log(id);
+    }
 
     return (
        <>
-            <View style = {styles.container} >
+            <View style = {styles.container} key = { product.id } onPress = { () => { thisloadDetail( product.id ) } }  >
                  <Image source = { image_url } style = {styles.image}/>
                  <View style = {styles.contentContainer}>
                      <Title> { product.name }</Title>

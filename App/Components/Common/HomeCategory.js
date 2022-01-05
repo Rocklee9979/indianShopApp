@@ -2,13 +2,13 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import  Icon  from 'react-native-vector-icons/Fontisto';
 
-export default function HomeCategory() {
+export default function HomeCategory({ category }) {
     return (
         <View style = {styles.container} >
         <View style = {styles.categoryContainer} >
              <Icon name="test-bottle" size={30} color="#000066"  style = {styles.catIconStyle}/>
         </View>
-        <Text style = {styles.categotyName}>Spices</Text>
+        <Text style = {styles.categotyName}> { category.name }</Text>
         </View>
     )
 }
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         padding:20,
         marginTop: 15,
     },
-    
+
     catIconStyle:{
         width: 50,
         height:50,

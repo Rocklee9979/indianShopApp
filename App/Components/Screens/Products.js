@@ -7,7 +7,6 @@ import { View,
     ScrollView,
     Image
 } from 'react-native';
-import axios from 'axios'
 
 import Header from '../Common/Header';
 import SearchBar from '../Common/SearchBar';
@@ -31,9 +30,9 @@ export default function Products() {
         try {
             await Promise.all([
               WooCommerceAPI.get("products")])
-             .then((response) => {
-               setProductList(response[0])
-               setIsLoading(false)
+              .then((response) => {
+                 setProductList(response[0])
+                 setIsLoading(false)
              })
            }
           catch(error){
@@ -63,7 +62,7 @@ export default function Products() {
 
               { productList.map(function(product){
                   return (
-                    <FlatCard product = { product } key = { product.id }/>
+                    <FlatCard product = { product } key = { product.id } />
                   )
               })}
 
