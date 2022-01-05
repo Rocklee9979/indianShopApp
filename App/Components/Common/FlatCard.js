@@ -45,9 +45,12 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 8,
         overflow: 'hidden',
-        marginBottom: 10,
+        marginBottom: 15,
         height: 80,
         marginTop:15,
+        marginLeft: 15,
+        marginRight:15,
+
     },
     image: {
 
