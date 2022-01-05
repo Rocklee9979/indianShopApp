@@ -53,12 +53,12 @@ export default function Products() {
 
     return (
       <SafeAreaView style = {styles.container}>
-          <ScrollView showsVerticalScrollIndicator = {false}>
+          
               <Header/>
               <View style = {styles.searchBarContainer}>
                   <SearchBar/>
               </View>
-
+        <ScrollView showsVerticalScrollIndicator = {false}>
 
               { productList.map(function(product){
                   return (
@@ -66,7 +66,7 @@ export default function Products() {
                   )
               })}
 
-          </ScrollView>
+        </ScrollView>
       </SafeAreaView>
     )
 
