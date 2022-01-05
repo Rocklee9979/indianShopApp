@@ -31,7 +31,7 @@ export default function DashBoard() {
           await Promise.all([
             WooCommerceAPI.get("products/categories", { 'parent' : "0",  "exclude" : "20" }), //json data as 2nd param for get quey strings ; Uncategorised ID excluded
             WooCommerceAPI.get("products", {"featured" : "true" }),
-            WooCommerceAPI.get("products", {"order" : "asc", "orderby" :'date', "page" : 1, "per_page" : 2 })
+            WooCommerceAPI.get("products", {"order" : "desc", "orderby" :'date', "page" : 1, "per_page" : 2 })
 
           ])
           .then(([categories, featured, recent ]) => {
