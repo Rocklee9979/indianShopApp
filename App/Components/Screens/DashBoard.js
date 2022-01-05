@@ -70,6 +70,7 @@ export default function DashBoard() {
                     horizondal showsHorizontalScrollIndicator = {false} >
 
                     { categoryList.map(function(category){
+                        console.log(category)
                         return (
                           <HomeCategory category = { category } key = { category.id }/>
                         )
