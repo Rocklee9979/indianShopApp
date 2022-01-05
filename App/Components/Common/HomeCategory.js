@@ -1,12 +1,19 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Image } from 'react-native';
 import  Icon  from 'react-native-vector-icons/Fontisto';
 
 export default function HomeCategory({ category }) {
+
+
     return (
         <View style = {styles.container} >
         <View style = {styles.categoryContainer} >
-             <Icon name="test-bottle" size={30} color="#000066"  style = {styles.catIconStyle}/>
+        { category.image !== null ?
+                <Image  source = {  { uri :category.image.src } } size={30} color="#000066"  style = {styles.catIconStyle}/>
+                :
+                <Icon name="test-bottle" size={30} color="#000066"  style = {styles.catIconStyle}/>
+
+          }
         </View>
         <Text style = {styles.categotyName}> { category.name }</Text>
         </View>
