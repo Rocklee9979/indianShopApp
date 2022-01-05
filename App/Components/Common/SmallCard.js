@@ -4,21 +4,21 @@ import BlockCard from './BlockCard';
 
 const {width} = Dimensions.get('window');
 
-export default function SmallCard({item}) {
+export default function SmallCard({ product }) {
     return (
-        <BlockCard item = {item} style = {styles.container} imageStyle = {styles.image} contentContainerStyle = {styles.contentContainer}/>
+        <BlockCard product = { product } style = {styles.container} imageStyle = {styles.image} contentContainerStyle = {styles.contentContainer}/>
     )
 }
 
 const styles = StyleSheet.create({
 
     container: {
-        width: width/2,
+        width: width/3,
         marginRight: 15,
         height: 200,
     },
     image: {
-        
+
         height: 100,
         position: 'absolute',
         top:20,
