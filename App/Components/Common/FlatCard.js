@@ -9,7 +9,7 @@ import SubTitle from './SubTitle';
 
 export default function FlatCard({ product }) {
 
-    const [productItem, setProductItem] = useState(product); //for future works 
+    const [productItem, setProductItem] = useState(product); //for future works
 
     const source = {
         html: `<p style='text-align:center; margin-top: 10px; overflow: hidden'>`
@@ -46,7 +46,7 @@ export default function FlatCard({ product }) {
 
                      </View>
                  </View>
-                 
+
               </View>
        </>
     )
@@ -63,8 +63,7 @@ const styles = StyleSheet.create({
         height: 150,
         marginTop:15,
         marginLeft: 15,
-        marginRight:15,
-
+       marginRight:15,
     },
     image: {
 
