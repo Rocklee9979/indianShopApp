@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         height: 80,
         width: 80,
         overflow: 'hidden',
-        backgroundColor: '#ffff00',
+        backgroundColor: '#ffff',
         borderRadius: 79/2,
         alignItems: 'center',
         padding:20,

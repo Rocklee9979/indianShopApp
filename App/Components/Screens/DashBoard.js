@@ -5,7 +5,8 @@ import { View,
     StyleSheet,
     SafeAreaView,
     ScrollView,
-    Image
+    Image,
+    FlatList
 } from 'react-native';
 import Header from '../Common/Header';
 import SearchBar from '../Common/SearchBar';
@@ -60,11 +61,12 @@ export default function DashBoard() {
 
   return (
       <SafeAreaView style = {styles.container}>
-          <ScrollView showsVerticalScrollIndicator = {false}>
+          
               <Header/>
               <View style = {styles.searchBarContainer}>
                   <SearchBar/>
               </View>
+          <ScrollView showsVerticalScrollIndicator = {false}>
 
               <View style = {styles.categoryContainer}
                     horizondal showsHorizontalScrollIndicator = {false} >
@@ -80,10 +82,13 @@ export default function DashBoard() {
                   <Title >SPECIAL OFFERS</Title>
                   { featuredProductList.map(function(product){
                       return (
+                       
                         <BlockCard product = { product} />
-
+                        
                       )
-                    })}
+                    })
+                    
+                    }
 
 
               </View>
@@ -97,11 +102,15 @@ export default function DashBoard() {
 
               <View style = {styles.recentContainer}>
                   <Title >RECENT</Title>
+                <ScrollView style = {{flexDirection: 'row'}} horizontal 
+                showsHorizontalScrollIndicator = {false}>
                   { recentProducts.map(function(product){
                       return (
+                       
                         <SmallCard  product ={ product } key = {product.id}/>
                       )
                   })}
+                </ScrollView>
               </View>
 
 

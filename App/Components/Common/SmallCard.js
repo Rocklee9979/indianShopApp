@@ -6,12 +6,22 @@ const {width} = Dimensions.get('window');
 
 export default function SmallCard({ product }) {
     return (
-        <BlockCard product = { product } style = {styles.container} imageStyle = {styles.image} contentContainerStyle = {styles.contentContainer}/>
+         
+            <BlockCard product = { product } 
+            style = {styles.container} 
+            imageStyle = {styles.image} 
+            contentContainerStyle = {styles.contentContainer}
+            />
+        
     )
 }
 
 const styles = StyleSheet.create({
 
+    scrollContainer:{
+        flexDirection: 'row',
+        
+    },
     container: {
         width: width/3,
         marginRight: 15,
@@ -30,6 +40,6 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         paddingRight:10,
         marginVertical: 120,
-    }
+    },
 
 })

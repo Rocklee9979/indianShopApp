@@ -7,7 +7,8 @@ export default function Title({children, numberOfLines = 2, size= 18,
             <Text numberOfLines = {numberOfLines} 
             style = {{fontWeight: 'bold', 
             fontSize: size, 
-            color: defaultColor, 
+            color: defaultColor,
+            alignItems: 'center', 
             padding: defaultPadding}} > {children}</Text>
         
     )
