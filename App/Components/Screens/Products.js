@@ -7,6 +7,7 @@ import { View,
     ScrollView,
     Image
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import Header from '../Common/Header';
 import SearchBar from '../Common/SearchBar';
@@ -20,7 +21,7 @@ import FlatCard from '../Common/FlatCard';
 import MessageWraper from '../Common/MessageWraper';
 import WooCommerceAPI from '../../lib/APIHelper'
 
-export default function Products() {
+export default function Products({navigation}) {
     const [ productList, setProductList ] = useState(null);
     const [ isLoading, setIsLoading ] = useState(true)
 

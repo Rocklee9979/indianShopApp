@@ -12,6 +12,7 @@ import Cart from '../Screens/Cart';
 import List from '../Screens/List';
 import Checkout from '../Screens/Checkout';
 import Settings from '../Screens/Settings';
+import ProductDetail from '../Screens/ProductDetail';
 
 import UserDashBoard from '../Screens/UserDashBoard'
 
@@ -34,6 +35,8 @@ export default function AppNavigator() {
             <Stack.Screen name="Settings" component={Settings} />
             <Stack.Screen name="Products" component={Products} />
             <Stack.Screen name="UserDashBoard" component={UserDashBoard} />
+            <Stack.Screen name='ProductDetail' component ={ProductDetail} 
+            initialParams={{productId: 0}}/>
         </Stack.Navigator>
     )
 }
