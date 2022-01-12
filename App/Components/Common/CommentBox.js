@@ -8,36 +8,44 @@ import Rating from './Rating';
 export default function CommentBox() {
 
     const totalStars = 5;
-    const [ gainStars, setgainStars ] = useState(0);
-
-    const addRating = ()=> {
-        alert(gainStars);
-
+    const [gainStars, setgainStars] = useState(0);
+    
+    const ratingStars = [1, 2, 3, 4, 5];
+    
+    const addRating = (value) => {
+        setgainStars(value);
     }
 
-    var ratingStars = [];
+    console.log(gainStars);
 
-	for(let i = 1; i <= (gainStars); i++){
+    // const addRating = ()=> {
+    //     alert(gainStars);
 
-		ratingStars.push(
-			<MaterialIcons 
-                    key={i} name="star" size={30} color="#f9db04"
-                    onPress={(key)=> setgainStars(i)}
-                    />
-		)
-	}
+    // }
+
+    // var ratingStars = [];
+
+	// for(let i = 1; i <= (gainStars); i++){
+
+	// 	ratingStars.push(
+	// 		<MaterialIcons 
+    //                 key={i} name="star" size={30} color="#f9db04"
+    //                 onPress={(key)=> setgainStars(i)}
+    //                 />
+	// 	)
+	// }
     
-    for(let j=1; j <= (5-gainStars); j++){
-        console.log(j);
+    // for(let j=1; j <= (5-gainStars); j++){
+    //     console.log(j);
 
-		ratingStars.push(
-			<MaterialIcons 
-                    key={j} name="star-border" size={30} color="#f9db04"
-                    onPress={(j)=>addRating(j)}
-                    />
+	// 	ratingStars.push(
+	// 		<MaterialIcons 
+    //                 key={j} name="star-border" size={30} color="#f9db04"
+    //                 onPress={(j)=>addRating(j)}
+    //                 />
                     
-		)
-	}
+	// 	)
+	// }
 	
       
 
@@ -45,7 +53,18 @@ export default function CommentBox() {
         <View style={styles.container}>
             <View style = {styles.ratingContainer}>
 
-            {ratingStars}
+            { ratingStars.map(  
+                    (stars) => {
+                        return (
+                            <MaterialIcons name='star' size={ 30 } color={stars<=gainStars ? 'green' : 'black'}
+                                onPress={ ()=>addRating(stars)}
+                            />
+
+                        )
+                        
+                    }
+            ) }
+                
             <Button onPress={addRating}> Test</Button>
             
             </View>
