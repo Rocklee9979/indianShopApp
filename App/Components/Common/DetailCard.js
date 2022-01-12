@@ -9,7 +9,9 @@ import { useNavigation } from '@react-navigation/native';
 
 import Title from './Title';
 import SubTitle from './SubTitle';
-import Review from './Review';
+import Rating from './Rating';
+import ReviewList from './ReviewList';
+import CommentBox from './CommentBox';
 
 export default function DetailCard({ product,detailStyle }) {
 
@@ -61,10 +63,11 @@ export default function DetailCard({ product,detailStyle }) {
                 <SubTitle numberOfLines={10}> { resultDesc }</SubTitle>
                 <View style = {styles.reviewContainer}>
                     <Title defaultPadding = '20' defaultColor = '#2a368f'> 
-                    Product Review</Title>
-
-                    <Review />
+                     Reviews</Title>
+                    <CommentBox/>
+                    <ReviewList productID = { product.id }/>
                 </View>
+
               </View>
        </>
     )
