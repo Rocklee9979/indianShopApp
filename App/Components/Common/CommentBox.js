@@ -18,37 +18,6 @@ export default function CommentBox() {
 
     console.log(gainStars);
 
-    // const addRating = ()=> {
-    //     alert(gainStars);
-
-    // }
-
-    // var ratingStars = [];
-
-	// for(let i = 1; i <= (gainStars); i++){
-
-	// 	ratingStars.push(
-	// 		<MaterialIcons 
-    //                 key={i} name="star" size={30} color="#f9db04"
-    //                 onPress={(key)=> setgainStars(i)}
-    //                 />
-	// 	)
-	// }
-    
-    // for(let j=1; j <= (5-gainStars); j++){
-    //     console.log(j);
-
-	// 	ratingStars.push(
-	// 		<MaterialIcons 
-    //                 key={j} name="star-border" size={30} color="#f9db04"
-    //                 onPress={(j)=>addRating(j)}
-    //                 />
-                    
-	// 	)
-	// }
-	
-      
-
     return (
         <View style={styles.container}>
             <View style = {styles.ratingContainer}>
@@ -56,7 +25,7 @@ export default function CommentBox() {
             { ratingStars.map(  
                     (stars) => {
                         return (
-                            <MaterialIcons name='star' size={ 30 } color={stars<=gainStars ? 'green' : 'black'}
+                            <MaterialIcons name='star' size={ 30 } color={stars<=gainStars ? '#f9db04' : 'cyan'}
                                 onPress={ ()=>addRating(stars)}
                             />
 
@@ -64,8 +33,6 @@ export default function CommentBox() {
                         
                     }
             ) }
-                
-            <Button onPress={addRating}> Test</Button>
             
             </View>
             <Textarea
